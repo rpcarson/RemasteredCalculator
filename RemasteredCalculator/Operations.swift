@@ -13,6 +13,12 @@ enum Operation: String {
     case Divide = "/"
 }
 
+enum StageOfOperation {
+    case PreOperator
+    case Operator
+    case PostOperator
+}
+
 func performOperation(a: Double, b: Double, operation: Operation) -> Double {
     switch operation {
     case .Add: return a + b

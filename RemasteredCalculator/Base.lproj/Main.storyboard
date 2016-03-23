@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -81,7 +82,7 @@
                                     <action selector="variableInput:" destination="BYZ-38-t0r" eventType="touchUpInside" id="muU-OP-SOT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzI-q9-RsV">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzI-q9-RsV">
                                 <rect key="frame" x="143" y="524" width="47" height="65"/>
                                 <color key="backgroundColor" red="0.35294117650000001" green="0.73333333329999995" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="3"/>
@@ -143,8 +144,34 @@
                                     <action selector="operationInput:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6QQ-rr-Zvp"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GjR-77-63w">
+                                <rect key="frame" x="143" y="594" width="47" height="65"/>
+                                <color key="backgroundColor" red="0.35294117650000001" green="0.73333333329999995" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="0"/>
+                                <connections>
+                                    <action selector="variableInput:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hin-Z3-w7g"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O3t-Ew-eGU">
+                                <rect key="frame" x="200" y="594" width="55" height="65"/>
+                                <color key="backgroundColor" red="0.35294117650000001" green="0.73333333329999995" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="back"/>
+                                <connections>
+                                    <action selector="variableInput:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3nL-0n-JRp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="O3t-Ew-eGU" secondAttribute="bottom" constant="8" id="7Le-kG-YHW"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="GjR-77-63w" secondAttribute="bottom" constant="8" id="Jc4-fd-Zub"/>
+                            <constraint firstItem="GjR-77-63w" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="293" id="QOb-kg-6Pn"/>
+                            <constraint firstItem="O3t-Ew-eGU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="40" id="Qfp-2t-AUo"/>
+                            <constraint firstItem="GjR-77-63w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-21" id="Wqp-o2-lEX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="O3t-Ew-eGU" secondAttribute="trailing" constant="104" id="c4M-sd-2IX"/>
+                            <constraint firstItem="GjR-77-63w" firstAttribute="top" secondItem="tzI-q9-RsV" secondAttribute="bottom" constant="5" id="cwC-dj-NSF"/>
+                            <constraint firstItem="O3t-Ew-eGU" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="293" id="iJR-Pb-xjf"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
