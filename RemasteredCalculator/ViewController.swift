@@ -21,6 +21,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var outputLabel: UILabel!
     
+    
+    
     @IBAction func clearButton(sender: UIButton) {
         
         clearMemory()
@@ -38,16 +40,11 @@ class ViewController: UIViewController {
             operation = Operation(rawValue: currentOperation)
             else { return }
         
-        let answer = performOperation(a, b: b, operation: operation)
+        computedAnswer = String(performOperation(a, b: b, operation: operation))
         
-        outputLabel.text = "\(answer)"
-        computedAnswer = String(answer)
+        outputLabel.text = "\(computedAnswer)"
         
         stage = StageOfOperation.PostOperator
-        
-        print(a)
-        print(b)
-        print(currentOperation)
         
     }
     
@@ -74,14 +71,14 @@ class ViewController: UIViewController {
         
     }
     
-    
+
     @IBAction func variableInput(sender: UIButton) {
-        print(stage)
-        print(sender.currentTitle)
+
         
         guard let input = sender.currentTitle else { return }
         
         switch stage {
+        
         case .PreOperator:
             if input == "back" {
                 if outputLabel.text != "" {
@@ -90,6 +87,7 @@ class ViewController: UIViewController {
             } else {
                 numberOne += input
             }
+            
             outputLabel.text = numberOne
 
             
@@ -104,14 +102,17 @@ class ViewController: UIViewController {
             outputLabel.text = "\(numberOne) \(currentOperation) \(numberTwo)"
         
         case .PostOperator:
+            
             clearMemory()
+            
             stage = StageOfOperation.PreOperator
             if input == "back" {
                 outputLabel.text = ""
-                return
-            }
+            } else {
             numberOne = input
             outputLabel.text = "\(numberOne)"
+                
+            }
         
         }
     }

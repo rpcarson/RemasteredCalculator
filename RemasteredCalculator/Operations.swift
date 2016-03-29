@@ -27,3 +27,23 @@ func performOperation(a: Double, b: Double, operation: Operation) -> Double {
     case .Divide: return a / b
     }
 }
+
+func clearMemory() {
+    
+    numberTwo = ""
+    numberOne = ""
+    computedAnswer = ""
+    currentOperation = ""
+    
+}
+
+
+func handleInput(input: String) {
+
+ 
+   
+    
+    
+    
+    
+}
