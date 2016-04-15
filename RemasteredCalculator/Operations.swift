@@ -11,8 +11,18 @@ enum Operation: String {
     case Subtract = "-"
     case Multiply = "X"
     case Divide = "/"
+    
+    func performOperation(a: Double, b: Double) -> Double {
+        switch self {
+        case .Add: return a + b
+        case .Subtract: return a - b
+        case .Multiply: return a * b
+        case .Divide: return a / b
+            
+        }
+    }
+    
 }
-
 enum StageOfOperation {
     case PreOperator
     case Operator
@@ -38,12 +48,3 @@ func clearMemory() {
 }
 
 
-func handleInput(input: String) {
-
- 
-   
-    
-    
-    
-    
-}

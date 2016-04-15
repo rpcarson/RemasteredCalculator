@@ -40,6 +40,7 @@ class ViewController: UIViewController {
             operation = Operation(rawValue: currentOperation)
             else { return }
         
+        
         computedAnswer = String(performOperation(a, b: b, operation: operation))
         
         outputLabel.text = "\(computedAnswer)"
