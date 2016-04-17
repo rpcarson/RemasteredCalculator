@@ -13,7 +13,7 @@ import Foundation
 
 // MARK - Calculator
 
-enum Operations: String {
+enum Operation: String {
     case Add = "+"
     case Subtract = "-"
     case Multiply = "*"
@@ -65,7 +65,7 @@ struct StringInputStack {
         for i in items {
             var index: Int = 0
             index += 1
-            if Operations.validOperations.contains(i) {
+            if Operation.validOperations.contains(i) {
                 index += 1
                 return (i, index)
             }
