@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     
     @IBAction func calculateButton(sender: UIButton) {
        
-        let dataSource = inputStack.convertStack()
+        guard let dataSource = inputStack.convertStack() else { return }
         let output = calculator.performOperation(dataSource)
 
         outputLabel.text = String(output)
@@ -44,10 +44,8 @@ class ViewController: UIViewController {
         guard let input = sender.currentTitle else { return }
         
         if String(inputStack.lastAnswer) == outputLabel.text! {
-            clear()        }
-        
-        print(String(inputStack.lastAnswer))
-        print(outputLabel.text!)
+            clear()
+        }
         
         inputStack.push(input)
         outputLabel.text = inputStack.getTextRepresentation()

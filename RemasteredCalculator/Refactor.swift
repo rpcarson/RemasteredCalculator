@@ -32,7 +32,9 @@ extension CalculatorType {
         case .Add: return dataSource.a + dataSource.b
         case .Subtract: return dataSource.a - dataSource.b
         case .Multiply: return dataSource.a * dataSource.b
-        case .Divide: return dataSource.a / dataSource.b
+        case .Divide: if dataSource.b == 0 { return 0 } else {
+            return dataSource.a / dataSource.b
+            }
         }
     }
 }
@@ -61,8 +63,9 @@ struct StringInputStack {   // handles binary operations, in format "a 'op' b" o
     
     var items: [String] = []
     var lastAnswer: Double = 0.0
-    
+   
     func getTextRepresentation() -> String {
+        if items.isEmpty { return "0.0" }
         var text: String = ""
         for i in items {
             text += i
@@ -80,7 +83,9 @@ struct StringInputStack {   // handles binary operations, in format "a 'op' b" o
     }
     
     mutating func push(item: String) {
+        
         if Operation.validOperations.contains(item) {
+            if items.isEmpty { return }
             for i in Operation.validOperations {
                 if items.contains(i) {
                     return
@@ -111,7 +116,7 @@ struct StringInputStack {   // handles binary operations, in format "a 'op' b" o
         return nil
     }
     
-    func convertStack() -> CalculatorDataSource {
+    func convertStack() -> CalculatorDataSource? {
         
         var a: String = ""
         var b: String = ""
@@ -131,7 +136,7 @@ struct StringInputStack {   // handles binary operations, in format "a 'op' b" o
             }
             
             var indexB = 0
-            for i in items[index..<items.count] {
+            for i in items[index + 1..<items.count] {
                 indexB += 1
                 print("index for B: \(indexB)")
                 b += i
@@ -142,7 +147,7 @@ struct StringInputStack {   // handles binary operations, in format "a 'op' b" o
         print(b)
         print(operation)
         
-        guard let aDouble = Double(a), bDouble = Double(b), op = Operation(rawValue: operation) else { print("default result") ; return DataSource.init(a: 0, b: 0, operation: .Add) }
+        guard let aDouble = Double(a), bDouble = Double(b), op = Operation(rawValue: operation) else { print("default result") ; return nil }
         
         return DataSource(a: aDouble, b: bDouble, operation: op)
         
