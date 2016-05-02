@@ -11,37 +11,46 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let calculator = Calculator()
+    var calculator = Calculator()
     var inputStack = StringInputStack()
-    
     
     @IBOutlet weak var outputLabel: UILabel!
     
+    func clear() {
+        inputStack.clearStack()
+        outputLabel.text = "0.0"
+        inputStack.lastAnswer = 0.0
+    }
+    
 
     @IBAction func clearButton(sender: UIButton) {
-        
-
-
+      clear()
         
     }
     
     @IBAction func calculateButton(sender: UIButton) {
-
+       
         let dataSource = inputStack.convertStack()
         let output = calculator.performOperation(dataSource)
+
         outputLabel.text = String(output)
-        inputStack.items = []
+        inputStack.lastAnswer = output
+        
     }
     
     
     @IBAction func userInput(sender: UIButton) {
-    
+        
         guard let input = sender.currentTitle else { return }
         
-        inputStack.items.append(input)
+        if String(inputStack.lastAnswer) == outputLabel.text! {
+            clear()        }
         
-        print(input)
-        print(inputStack.items)
+        print(String(inputStack.lastAnswer))
+        print(outputLabel.text!)
+        
+        inputStack.push(input)
+        outputLabel.text = inputStack.getTextRepresentation()
     
     }
 
@@ -49,7 +58,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        outputLabel.text = "0.0"
         
     }
 

@@ -57,16 +57,54 @@ struct DataSource: CalculatorDataSource {
 
 // MARK: String Input handling
 
-struct StringInputStack {
+struct StringInputStack {   // handles binary operations, in format "a 'op' b" only
     
     var items: [String] = []
+    var lastAnswer: Double = 0.0
     
-    func getOperator() -> (operation: String, index: Int)? {
+    func getTextRepresentation() -> String {
+        var text: String = ""
         for i in items {
-            var index: Int = 0
+            text += i
+        }
+        return text
+    }
+    
+    
+    mutating func clearStack() {
+        items = []
+    }
+
+    func getItems() -> [String] {
+        return items
+    }
+    
+    mutating func push(item: String) {
+        if Operation.validOperations.contains(item) {
+            for i in Operation.validOperations {
+                if items.contains(i) {
+                    return
+                }
+            }
+        }
+        
+        items.append(item)
+
+    }
+    
+    mutating func pop() {
+        if !items.isEmpty {
+            items.removeLast()
+        }
+    }
+    
+    
+    private func getOperator() -> (operation: String, index: Int)? {
+        
+        var index: Int = -1
+        for i in items {
             index += 1
             if Operation.validOperations.contains(i) {
-                index += 1
                 return (i, index)
             }
         }
@@ -80,12 +118,22 @@ struct StringInputStack {
         var operation: String = ""
         
         if let (op, index) = getOperator() {
+            print(index)
+            print(items.count)
+            
             operation = op
             
-            for i in items[0..<index] {
+            var indexA = 0
+            for i in items[0...index - 1] {
+                indexA += 1
+                print("index for a: \(indexA)")
                 a += i
             }
-            for i in items[index + 1..<items.count] {
+            
+            var indexB = 0
+            for i in items[index..<items.count] {
+                indexB += 1
+                print("index for B: \(indexB)")
                 b += i
             }
         }
@@ -94,7 +142,7 @@ struct StringInputStack {
         print(b)
         print(operation)
         
-        guard let aDouble = Double(a), bDouble = Double(b), op = Operation(rawValue: operation) else { return DataSource.init(a: 0, b: 0, operation: .Add) }
+        guard let aDouble = Double(a), bDouble = Double(b), op = Operation(rawValue: operation) else { print("default result") ; return DataSource.init(a: 0, b: 0, operation: .Add) }
         
         return DataSource(a: aDouble, b: bDouble, operation: op)
         

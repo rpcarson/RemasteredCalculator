@@ -152,7 +152,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rpc-Si-q6l">
                                 <rect key="frame" x="293" y="230" width="47" height="65"/>
                                 <color key="backgroundColor" red="1" green="0.41509226970000002" blue="0.22765794540000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="X"/>
+                                <state key="normal" title="*"/>
                                 <connections>
                                     <action selector="userInput:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8cn-c6-I8b"/>
                                 </connections>
