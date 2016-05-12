@@ -58,7 +58,7 @@
                                     <action selector="userInput:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Y8d-7J-QF3"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVn-fh-U29">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVn-fh-U29">
                                 <rect key="frame" x="81" y="524" width="47" height="65"/>
                                 <color key="backgroundColor" red="0.35294117650000001" green="0.73333333329999995" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="2"/>
@@ -148,6 +148,9 @@
                                 <rect key="frame" x="200" y="594" width="55" height="65"/>
                                 <color key="backgroundColor" red="0.35294117650000001" green="0.73333333329999995" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="back"/>
+                                <connections>
+                                    <action selector="userInput:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kwu-3F-cMf"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rpc-Si-q6l">
                                 <rect key="frame" x="293" y="230" width="47" height="65"/>
@@ -157,17 +160,29 @@
                                     <action selector="userInput:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8cn-c6-I8b"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Isl-Ge-dtz">
+                                <rect key="frame" x="81" y="594" width="47" height="65"/>
+                                <color key="backgroundColor" red="0.35294117650000001" green="0.73333333329999995" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="."/>
+                                <connections>
+                                    <action selector="userInput:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hiD-nu-Ttu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="O3t-Ew-eGU" secondAttribute="bottom" constant="8" id="7Le-kG-YHW"/>
+                            <constraint firstItem="Isl-Ge-dtz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="61" id="IZv-TH-AaK"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="GjR-77-63w" secondAttribute="bottom" constant="8" id="Jc4-fd-Zub"/>
                             <constraint firstItem="GjR-77-63w" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="293" id="QOb-kg-6Pn"/>
                             <constraint firstItem="O3t-Ew-eGU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="40" id="Qfp-2t-AUo"/>
                             <constraint firstItem="GjR-77-63w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-21" id="Wqp-o2-lEX"/>
+                            <constraint firstItem="GjR-77-63w" firstAttribute="leading" secondItem="Isl-Ge-dtz" secondAttribute="trailing" constant="15" id="YQ6-L2-j2y"/>
                             <constraint firstAttribute="trailingMargin" secondItem="O3t-Ew-eGU" secondAttribute="trailing" constant="104" id="c4M-sd-2IX"/>
                             <constraint firstItem="GjR-77-63w" firstAttribute="top" secondItem="tzI-q9-RsV" secondAttribute="bottom" constant="5" id="cwC-dj-NSF"/>
                             <constraint firstItem="O3t-Ew-eGU" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="293" id="iJR-Pb-xjf"/>
+                            <constraint firstItem="Isl-Ge-dtz" firstAttribute="top" secondItem="AVn-fh-U29" secondAttribute="bottom" constant="5" id="l06-xB-5dk"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Isl-Ge-dtz" secondAttribute="bottom" constant="8" id="rpC-Yk-RIQ"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
