@@ -50,18 +50,6 @@ class ViewController: UIViewController {
         print(" last answer\(inputStack.lastAnswer)")
         print("label text \(outputLabel.text!)")
         
-        /*
-        
-        if input == "back" {
-            inputStack.pop()
-            outputLabel.text = inputStack.getTextRepresentation()
-            return
-        }
-        
-        inputStack.push(input)
-        outputLabel.text = inputStack.getTextRepresentation()
- 
- */
         if input == "back" {
             inputStack.pop()
             outputLabel.text = inputStack.inputString

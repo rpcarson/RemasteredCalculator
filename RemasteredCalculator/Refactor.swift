@@ -64,50 +64,13 @@ struct DataSource: CalculatorDataSource {
 struct StringInputStack {   // handles binary operations, in format "a 'op' b" only
     
     var inputString = ""
-    
-    var items: [String] = []
     var lastAnswer: Double = 0.0
-   
-    func getTextRepresentation() -> String {
-       
-        /*
-       
-         if items.isEmpty { return "0.0" }
-        var text: String = ""
-        for i in items {
-            text += i
-        }
-        return text
-        
-        */
-        
-        return ""
-    }
-    
     
     mutating func clearStack() {
-        items = []
-        
         inputString.removeAll()
     }
 
     mutating func push(item: String) {
-        
-        /*
-        if Operation.validOperations.contains(item) {
-            if items.isEmpty { return }
-            for i in Operation.validOperations {
-                if items.contains(i) {
-                    return
-                }
-            }
-        }
-       
-         items.append(item)
-
-         
-         */
-        
         if Operation.validOperations.contains(item) {
             if inputString == "" { return }
             for i in Operation.validOperations {
@@ -117,80 +80,29 @@ struct StringInputStack {   // handles binary operations, in format "a 'op' b" o
         
         inputString += item
         print(inputString)
-        
-
     }
     
     mutating func pop() {
-        /*
-        if !items.isEmpty {
-            items.removeLast()
-        }
- */
         inputString = String(inputString.characters.dropLast())
-        
     }
     
-    func getOp() -> String {
-        for i in Operation.validOperations {
-            if inputString.containsString(i) {
-                return i
-            }
-        }
-        return "unrecognized operator"
-    }
-    
-    /*
-    private func getOperator() -> (operation: String, index: Int)? {
-        
-        var index: Int = -1
-        for i in items {
-            index += 1
-            if Operation.validOperations.contains(i) {
-                return (i, index)
-            }
-        }
-        return nil
-    }
- */
     
     func convertStack() -> CalculatorDataSource? {
-        
-        /*
-        var a: String = ""
-        var b: String = ""
-        var operation: String = ""
-        
-        if let (op, index) = getOperator() {
-            print(index)
-            print(items.count)
-            
-            operation = op
-            
-            var indexA = 0
-            for i in items[0...index - 1] {
-                indexA += 1
-                print("index for a: \(indexA)")
-                a += i
-            }
-            
-            var indexB = 0
-            for i in items[index + 1..<items.count] {
-                indexB += 1
-                print("index for B: \(indexB)")
-                b += i
-            }
-        }
-        
-     
-        */
         
         let string = inputString.componentsSeparatedByCharactersInSet(Operation.opsSet)
         if string.count < 2 { return nil }
         
         let a = string[0]
         let b = string[1]
-        let operation = getOp()
+        
+        var operation: String {
+            for i in Operation.validOperations {
+                if inputString.containsString(i) {
+                    return i
+                }
+            }
+            return "invalid operation"
+        }
         
         print(a)
         print(b)
