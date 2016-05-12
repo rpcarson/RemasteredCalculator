@@ -20,7 +20,6 @@ enum Operation: String {
     case Divide = "/"
     
     static let validOperations = ["+","-","*","/"]
-    
     static let opsSet = NSCharacterSet(charactersInString: "+-/*")
 }
 
@@ -28,7 +27,7 @@ protocol CalculatorType {
     func performOperation(dataSource: CalculatorDataSource) -> Double
 }
 
-extension CalculatorType {
+struct Calculator: CalculatorType {
     func performOperation(dataSource: CalculatorDataSource) -> Double {
         switch dataSource.operation {
         case .Add: return dataSource.a + dataSource.b
@@ -40,8 +39,6 @@ extension CalculatorType {
         }
     }
 }
-
-struct Calculator: CalculatorType {}
 
 
 // MARK: Calculator data source
@@ -64,13 +61,44 @@ struct DataSource: CalculatorDataSource {
 struct StringInputStack {   // handles binary operations, in format "a 'op' b" only
     
     var inputString = ""
+
+    var string: [String] { return inputString.componentsSeparatedByCharactersInSet(Operation.opsSet) }
+   // var a: String { if string.count < 2 { return inputString } else { return string[0] } }
+    
+    var a: String {
+        get {
+        if string.count < 2 { return inputString } else { return string[0] }
+        } set {  }
+    }
+    
+    
+   // var b: String { if string.count < 2 { return "" } else { return string[1] } }
+    
+    var b: String {
+        get {
+            if string.count < 2 { return "" } else { return string[1] }
+        } set { }
+    }
+   
+    var operation: String {
+        for i in Operation.validOperations {
+            if inputString.containsString(i) {
+                return i
+            }
+        }
+        return "invalid operation"
+    }
+
+
     var lastAnswer: Double = 0.0
+    var hasOperator: Bool { return Operation.validOperations.contains(operation) }
     
     mutating func clearStack() {
         inputString.removeAll()
     }
 
     mutating func push(item: String) {
+        
         if Operation.validOperations.contains(item) {
             if inputString == "" { return }
             for i in Operation.validOperations {
@@ -78,8 +106,33 @@ struct StringInputStack {   // handles binary operations, in format "a 'op' b" o
             }
         }
         
+        ////// formatting input ********
+        if item == "." {
+            if let first = a.characters.first {
+                if first == "." { a = "0" + a }
+                print("first \(first)")
+
+            }
+         
+            if hasOperator {
+                if let first = b.characters.first {
+                    if first == "." { b = "0" + b }
+                    print(first)
+
+                }
+                if b.containsString(item) { return }
+                
+            } else if a.containsString(item) { return }
+        }
+        
+        if Operation.validOperations.contains(item) {
+            if inputString.characters.last == "." {
+                inputString += "0"
+            }
+        }
+        //////// **************
+        
         inputString += item
-        print(inputString)
     }
     
     mutating func pop() {
@@ -88,26 +141,6 @@ struct StringInputStack {   // handles binary operations, in format "a 'op' b" o
     
     
     func convertStack() -> CalculatorDataSource? {
-        
-        let string = inputString.componentsSeparatedByCharactersInSet(Operation.opsSet)
-        if string.count < 2 { return nil }
-        
-        let a = string[0]
-        let b = string[1]
-        
-        var operation: String {
-            for i in Operation.validOperations {
-                if inputString.containsString(i) {
-                    return i
-                }
-            }
-            return "invalid operation"
-        }
-        
-        print(a)
-        print(b)
-        print(operation)
-        
         
         guard let aDouble = Double(a), bDouble = Double(b), op = Operation(rawValue: operation) else { print("default result") ; return nil }
         

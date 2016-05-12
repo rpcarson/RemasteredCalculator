@@ -31,8 +31,8 @@ class ViewController: UIViewController {
     @IBAction func calculateButton(sender: UIButton) {
        
         guard let dataSource = inputStack.convertStack() else { return }
+        
         let output = calculator.performOperation(dataSource)
-
         outputLabel.text = String(output)
         inputStack.lastAnswer = output
         
@@ -47,14 +47,12 @@ class ViewController: UIViewController {
             clear()
         }
         
-        print(" last answer\(inputStack.lastAnswer)")
-        print("label text \(outputLabel.text!)")
-        
         if input == "back" {
             inputStack.pop()
             outputLabel.text = inputStack.inputString
             return
         }
+        
         
         inputStack.push(input)
         outputLabel.text = inputStack.inputString
@@ -64,11 +62,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         outputLabel.text = "0.0"
-        
     }
 
-    
 }
 
