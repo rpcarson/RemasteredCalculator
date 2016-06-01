@@ -9,6 +9,9 @@
 import Foundation
 
 
+protocol DisplayType {
+    func updateLabel()
+}
 
 
 // MARK - Calculator
@@ -60,26 +63,18 @@ struct DataSource: CalculatorDataSource {
 
 struct StringInputStack {   // handles binary operations, in format "a 'op' b" only
     
+    var displayDelegate: DisplayType?
+    
+    
     var inputString = ""
-
     var string: [String] { return inputString.componentsSeparatedByCharactersInSet(Operation.opsSet) }
-   // var a: String { if string.count < 2 { return inputString } else { return string[0] } }
+  
+    // var a: String { if string.count < 2 { return inputString } else { return string[0] } }
+    //var b: String { if string.count < 2 { return "" } else { return string[1] } }
     
-    var a: String {
-        get {
-        if string.count < 2 { return inputString } else { return string[0] }
-        } set {  }
-    }
+    var a: String { return string.count < 2 ? inputString : string[0] }
+    var b: String { return string.count < 2 ? "" : string[1] }
     
-    
-   // var b: String { if string.count < 2 { return "" } else { return string[1] } }
-    
-    var b: String {
-        get {
-            if string.count < 2 { return "" } else { return string[1] }
-        } set { }
-    }
-   
     var operation: String {
         for i in Operation.validOperations {
             if inputString.containsString(i) {
@@ -88,15 +83,14 @@ struct StringInputStack {   // handles binary operations, in format "a 'op' b" o
         }
         return "invalid operation"
     }
-
-
+   
     var lastAnswer: Double = 0.0
     var hasOperator: Bool { return Operation.validOperations.contains(operation) }
     
     mutating func clearStack() {
         inputString.removeAll()
     }
-
+    
     mutating func push(item: String) {
         
         if Operation.validOperations.contains(item) {
@@ -107,22 +101,23 @@ struct StringInputStack {   // handles binary operations, in format "a 'op' b" o
         }
         
         ////// formatting input ********
+        
+        
         if item == "." {
-            if let first = a.characters.first {
-                if first == "." { a = "0" + a }
-                print("first \(first)")
-
+            if a.isEmpty {
+                inputString += "0"
             }
-         
+            if hasOperator && b.isEmpty {
+                inputString += "0"
+            }
             if hasOperator {
-                if let first = b.characters.first {
-                    if first == "." { b = "0" + b }
-                    print(first)
-
+                if b.containsString(item) {
+                    return
                 }
-                if b.containsString(item) { return }
                 
-            } else if a.containsString(item) { return }
+            } else if a.containsString(item) {
+                return
+            }
         }
         
         if Operation.validOperations.contains(item) {
@@ -130,7 +125,6 @@ struct StringInputStack {   // handles binary operations, in format "a 'op' b" o
                 inputString += "0"
             }
         }
-        //////// **************
         
         inputString += item
     }

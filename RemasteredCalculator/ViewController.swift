@@ -9,7 +9,13 @@
 import UIKit
 
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, DisplayType {
+    
+    func updateLabel() {
+        
+        outputLabel.text = inputStack.inputString
+        
+    }
     
     var calculator = Calculator()
     var inputStack = StringInputStack()
@@ -45,8 +51,11 @@ class ViewController: UIViewController {
         
         if String(inputStack.lastAnswer) == outputLabel.text! {
             clear()
+            if input == "back" {
+                return
+            }
         }
-        
+    
         if input == "back" {
             inputStack.pop()
             outputLabel.text = inputStack.inputString
@@ -63,6 +72,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         outputLabel.text = "0.0"
+        
+        inputStack.displayDelegate = self
     }
 
 }
