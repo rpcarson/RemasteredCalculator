@@ -29,12 +29,12 @@ class ViewController: UIViewController, DisplayType {
     }
     
 
-    @IBAction func clearButton(sender: UIButton) {
+    @IBAction func clearButton(_ sender: UIButton) {
       clear()
         
     }
     
-    @IBAction func calculateButton(sender: UIButton) {
+    @IBAction func calculateButton(_ sender: UIButton) {
        
         guard let dataSource = inputStack.convertStack() else { return }
         
@@ -45,7 +45,7 @@ class ViewController: UIViewController, DisplayType {
     }
     
     
-    @IBAction func userInput(sender: UIButton) {
+    @IBAction func userInput(_ sender: UIButton) {
         
         guard let input = sender.currentTitle else { return }
         

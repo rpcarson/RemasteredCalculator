@@ -23,7 +23,7 @@ enum Operation: String {
     case Divide = "/"
     
     static let validOperations = ["+","-","*","/"]
-    static let opsSet = NSCharacterSet(charactersInString: "+-/*")
+    static let opsSet = CharacterSet(charactersIn: "+-/*")
 }
 
 protocol CalculatorType {
@@ -65,11 +65,13 @@ struct StringInputStack {   // handles binary operations, in format "a 'op' b" o
     
     var displayDelegate: DisplayType?
     
-    
     var inputString = ""
-    var string: [String] { return inputString.componentsSeparatedByCharactersInSet(Operation.opsSet) }
+    
+    var string: [String] {
+        return inputString.components(separatedBy: Operation.opsSet)
+    }
   
-    // var a: String { if string.count < 2 { return inputString } else { return string[0] } }
+    //var a: String { if string.count < 2 { return inputString } else { return string[0] } }
     //var b: String { if string.count < 2 { return "" } else { return string[1] } }
     
     var a: String { return string.count < 2 ? inputString : string[0] }
@@ -77,7 +79,7 @@ struct StringInputStack {   // handles binary operations, in format "a 'op' b" o
     
     var operation: String {
         for i in Operation.validOperations {
-            if inputString.containsString(i) {
+            if inputString.contains(i) {
                 return i
             }
         }
@@ -91,12 +93,12 @@ struct StringInputStack {   // handles binary operations, in format "a 'op' b" o
         inputString.removeAll()
     }
     
-    mutating func push(item: String) {
+    mutating func push(_ item: String) {
         
         if Operation.validOperations.contains(item) {
             if inputString == "" { return }
             for i in Operation.validOperations {
-                if inputString.containsString(i) { return }
+                if inputString.contains(i) { return }
             }
         }
         
@@ -111,11 +113,11 @@ struct StringInputStack {   // handles binary operations, in format "a 'op' b" o
                 inputString += "0"
             }
             if hasOperator {
-                if b.containsString(item) {
+                if b.contains(item) {
                     return
                 }
                 
-            } else if a.containsString(item) {
+            } else if a.contains(item) {
                 return
             }
         }
@@ -136,7 +138,7 @@ struct StringInputStack {   // handles binary operations, in format "a 'op' b" o
     
     func convertStack() -> CalculatorDataSource? {
         
-        guard let aDouble = Double(a), bDouble = Double(b), op = Operation(rawValue: operation) else { print("default result") ; return nil }
+        guard let aDouble = Double(a), let bDouble = Double(b), let op = Operation(rawValue: operation) else { print("default result") ; return nil }
         
         return DataSource(a: aDouble, b: bDouble, operation: op)
         
